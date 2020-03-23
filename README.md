@@ -17,4 +17,4 @@
 ```console
  python main.py c min Italy Brazil
 ```
-![alt text](https://github.com/Joaquin98/Covid-19/blob/master/Examples/Brazil_Italy.png "Logo Title Text 1")
+![alt text](https://github.com/Joaquin98/Covid-19/blob/master/Examples/Italy_Brazil.png "Logo Title Text 1")
