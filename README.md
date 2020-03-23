@@ -3,6 +3,12 @@
 ```console
  pip install -r requirements.txt
 ```
+
+### How To Use:
+```console
+ python main.py $option1 $option2 $country1 $country2 ... $countryN 
+```
+
 ### Examples:
 ```console
  python main.py d max US Italy Spain
