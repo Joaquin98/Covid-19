@@ -1,2 +1,2 @@
-# Covid 19
+# COVID 19
 Covid-19 Data Graphs
