@@ -1,2 +1,4 @@
 # COVID 19
-Covid-19 Data Graphs
+```console
+ pip install -r requirements.txt
+```
