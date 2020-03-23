@@ -5,9 +5,19 @@
 ```
 
 ### How To Use:
+####Command:
 ```console
  python main.py $option1 $option2 $country1 $country2 ... $countryN 
 ```
+####Option1:
+- d : Deaths
+- c : Confirmed Cases
+
+####Option2:
+- time : 
+- max :
+- min :
+
 
 ### Examples:
 ```console
