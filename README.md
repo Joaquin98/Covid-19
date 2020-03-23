@@ -14,9 +14,9 @@
 - c : Confirmed Cases
 
 #### Option2:
-- time : The X Axis are Dates.
-- max : The X Axis represent the days after the first death/confirmed case of every country, and the focus is on the country with more days.
-- min : The X Axis represent the days after the first death/confirmed case of every country, and the focus is on the country with less days.
+- time : The X axis are dates.
+- max : The X axis represent the days after the first death/confirmed case of every country, the focus is on the country with more days.
+- min : The focus is on the country with less days.
 
 
 ### Examples:
