@@ -3,8 +3,8 @@ import sys
 import urllib
 from matplotlib import pyplot as plt
 
-deaths = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
-confirmed = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv" 
+deaths = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv" 
+confirmed = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
 
 urllib.urlretrieve (deaths,"deaths.csv")
 urllib.urlretrieve (confirmed,"confirmed.csv")
@@ -59,6 +59,10 @@ def plot_list(opt,cList,f):
             data.append((country,f(deathsDict[country])))
         if opt[0] == "c":
             data.append((country,f(confirmedDict[country])))
+        if opt[0] == "dd":
+            data.append((country,deathsDictDaily[country]))
+        if opt[0] == "cd":
+            data.append((country,confirmedDictDaily[country]))
     data.sort(key=len_tuple)
     
     if opt[1] == "time":
@@ -93,14 +97,32 @@ def replace_zeros (data):
 def clean_zeros (data):
     return [x for x in data if x>0]
 
+def get_daily (dataDict):
+    dailyDict = {}
+    for k,vc in dataDict.items():
+        v = vc[:]
+        if k =="Dates":
+            continue
+        r = range(1,len(v))
+        map(int,v)
+        r.reverse()
+        for i in r:
+            v[i] -= v[i-1]
+            if v[i] == 0 and i<len(v)-1:
+                v[i] = 4*v[i+1]/10
+                v[i+1] = 6*v[i+1]/10
+        dailyDict[k] = v
+    return dailyDict
 
 deathsDict = get_deaths()
+deathsDictDaily = get_daily(deathsDict)
 confirmedDict = get_confirmed()
+confirmedDictDaily = get_daily(confirmedDict)
 fullDates = deathsDict["Dates"]
 option = (sys.argv[1],sys.argv[2])
 countries = sys.argv[3:]
 if option[1] == "time":
     plot_list(option,countries,replace_zeros)
 else :
-    plot_list(option,countries,clean_zeros)
+     plot_list(option,countries,clean_zeros)
 
