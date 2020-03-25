@@ -85,7 +85,7 @@ def plot_list(opt,cList,f):
             countryData = countryData[:len(dates)]
         if opt[0][-1:] == "r":
             for i in range(0,len(countryData)):
-                countryData[i] = countryData[i]*1.0/popDict[name]
+                countryData[i] = countryData[i]*100.0/popDict[name]
         if opt[1] == "time":
             plt.plot(dates,countryData,label = name,marker='o',markersize=5)
         else :
