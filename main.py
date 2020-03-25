@@ -55,14 +55,18 @@ def plot_list(opt,cList,f):
     data = []
 
     for country in cList:
-        if opt[0] == "d":
-            data.append((country,f(deathsDict[country])))
-        if opt[0] == "c":
-            data.append((country,f(confirmedDict[country])))
-        if opt[0] == "dd":
+        if opt[0][0:2] == "dd":
             data.append((country,deathsDictDaily[country]))
-        if opt[0] == "cd":
-            data.append((country,confirmedDictDaily[country]))
+        else :
+            if opt[0][0:2] == "cd":
+                data.append((country,confirmedDictDaily[country]))
+            else :
+                if opt[0][0:1] == "c":
+                    data.append((country,f(confirmedDict[country])))
+                else :
+                     if opt[0][0:1] == "d":
+                        data.append((country,f(deathsDict[country])))
+
     data.sort(key=len_tuple)
     
     if opt[1] == "time":
@@ -79,6 +83,9 @@ def plot_list(opt,cList,f):
             countryData = countryData + [float('nan')]*(len(dates)-len(countryData))
         else :
             countryData = countryData[:len(dates)]
+        if opt[0][-1:] == "r":
+            for i in range(0,len(countryData)):
+                countryData[i] = countryData[i]*1.0/popDict[name]
         if opt[1] == "time":
             plt.plot(dates,countryData,label = name,marker='o',markersize=5)
         else :
@@ -114,6 +121,17 @@ def get_daily (dataDict):
         dailyDict[k] = v
     return dailyDict
 
+def get_population ():
+    popDict = {}
+    data = []
+    with open('population.csv','r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            popDict[row[0]] = int(row[1])
+    return popDict   
+
+
+popDict = get_population()
 deathsDict = get_deaths()
 deathsDictDaily = get_daily(deathsDict)
 confirmedDict = get_confirmed()
